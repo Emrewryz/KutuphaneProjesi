@@ -1,0 +1,71 @@
+﻿@model KutuphaneProjesi.Models.KITAPLAR
+
+@{
+    ViewData["Title"] = "Yeni Kitap Ekle";
+}
+
+<h1>Yeni Kitap Ekle</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Ad" class="control-label"></label>
+                <input asp-for="Ad" class="form-control" />
+                <span asp-validation-for="Ad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SayfaSayisi" class="control-label"></label>
+                <input asp-for="SayfaSayisi" class="form-control" />
+                <span asp-validation-for="SayfaSayisi" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="YazarId" class="control-label">Yazar</label>
+              
+                <select asp-for="YazarId" class="form-control" asp-items="ViewBag.YazarlarListesi">
+                    <option value="">-- Lütfen Bir Yazar Seçin --</option>
+                </select>
+                <span asp-validation-for="YazarId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="KategoriId" class="control-label"></label>
+                <select asp-for="KategoriId" class="form-control" asp-items="ViewBag.KategorilerListesi">
+                    <option value="">-- Kategori Seçin --</option>
+                </select>
+                <span asp-validation-for="KategoriId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Aciklama" class="control-label"></label>
+                <textarea asp-for="Aciklama" class="form-control"></textarea>
+                <span asp-validation-for="Aciklama" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GorselUrl" class="control-label"></label>
+                <input asp-for="GorselUrl" class="form-control" />
+                <span asp-validation-for="GorselUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Icerik" class="control-label"></label>
+                <textarea asp-for="Icerik" class="form-control" rows="10"></textarea>
+                <span asp-validation-for="Icerik" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Oluştur" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Listeye Geri Dön</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

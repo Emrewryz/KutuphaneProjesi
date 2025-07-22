@@ -1,0 +1,51 @@
+﻿@model IEnumerable<KutuphaneProjesi.Models.KITAPLAR>
+@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+
+@if (User.Identity != null && User.Identity.IsAuthenticated)
+{
+    <div class="text-center">
+        <h1 class="display-4">Hoş geldin, @User.Identity.Name!</h1>
+        <p class="lead text-muted">Kütüphanede yeni bir şeyler mi arıyorsun?</p>
+
+        <div class="row justify-content-center my-4">
+            <div class="col-md-6">
+                <form asp-controller="Kitaplar" asp-action="Index" method="get" class="d-flex">
+                    <input type="text" name="aramakelimesi" class="form-control form-control-lg" placeholder="Kitap veya yazar adı ara..." />
+                    <button type="submit" class="btn btn-primary btn-lg ms-2">Ara</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <hr class="my-4" />
+
+    <h2 class="mb-3">Yeni Eklenenler</h2>
+    <div class="row">
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var kitap in Model)
+            {
+                @await Html.PartialAsync("_BookCardPartial", kitap)
+            }
+        }
+        else
+        {
+            <p>Sisteme henüz hiç kitap eklenmemiş.</p>
+        }
+    </div>
+}
+else
+{
+    <div class="container d-flex align-items-center justify-content-center" style="height: 70vh;">
+        <div class="text-center">
+            <h1 class="display-4 mb-4">Kütüphane Yönetim Sistemine Hoş Geldiniz</h1>
+            <p class="lead mb-4">Lütfen devam etmek için bir işlem seçin.</p>
+            <div class="d-flex justify-content-center">
+                <a class="btn btn-primary btn-lg mx-2" asp-controller="Account" asp-action="Login">Giriş Yap</a>
+                <a class="btn btn-secondary btn-lg mx-2" asp-controller="Account" asp-action="Register">Kayıt Ol</a>
+            </div>
+        </div>
+    </div>
+}

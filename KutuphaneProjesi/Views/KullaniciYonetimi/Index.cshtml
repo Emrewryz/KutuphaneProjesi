@@ -1,0 +1,43 @@
+﻿@model IEnumerable<KutuphaneProjesi.Models.Kullanici>
+
+@{
+    ViewData["Title"] = "Kullanıcı Yönetimi";
+}
+
+<h1>Kullanıcı Yönetimi</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Kullanıcı Adı</th>
+            <th>E-posta</th>
+            <th>Rol</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var kullanici in Model)
+        {
+            <tr>
+                <td>@kullanici.KullaniciAdi</td>
+                <td>@kullanici.Eposta</td>
+                <td>@kullanici.Rol</td>
+                <td>
+                    @if (kullanici.Rol == "Uye")
+                    {
+                        <form asp-action="RoluAdminYap" asp-route-id="@kullanici.Id" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-sm btn-success">Admin Yap</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form asp-action="RoluUyeYap" asp-route-id="@kullanici.Id" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-sm btn-warning">Üye Yap</button>
+                        </form>
+                    }
+                    <a asp-action="Delete" asp-route-id="@kullanici.Id" class="btn btn-sm btn-danger">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

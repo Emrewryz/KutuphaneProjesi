@@ -1,0 +1,27 @@
+﻿@model KutuphaneProjesi.Models.KITAPLAR
+
+@{
+    ViewData["Title"] = "Kitap Sil";
+}
+
+<h1>Kitap Sil</h1>
+
+<h3>Bu kaydı silmek istediğinizden emin misiniz?</h3>
+<div>
+    <h4>Üye Bilgileri</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Ad)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Ad)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.SayfaSayisi)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.SayfaSayisi)</dd>
+
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Evet, Sil" class="btn btn-danger" /> |
+        <a asp-action="Index">Listeye Geri Dön</a>
+    </form>
+</div>

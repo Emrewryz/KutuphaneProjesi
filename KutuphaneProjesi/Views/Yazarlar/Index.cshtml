@@ -1,0 +1,40 @@
+﻿@model IEnumerable<KutuphaneProjesi.Models.YAZARLAR>
+
+@{
+	ViewData["Title"] = "Yazarlar";
+	// Layout = null;
+
+}
+<h1>Yazar Listesi</h1>
+<p>
+	<a asp-action="Create">Yeni Yazar Ekle</a>
+</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+
+				@Html.DisplayNameFor(model => model.AdSoyad)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var uye in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => uye.AdSoyad)
+				</td>
+				
+				<td>
+					<a asp-action="Edit" asp-route-id="@uye.Id">Düzenle</a> |
+					<a asp-action="Details" asp-route-id="@uye.Id">Detaylar</a> |
+					<a asp-action="Delete" asp-route-id="@uye.Id">Sil</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+

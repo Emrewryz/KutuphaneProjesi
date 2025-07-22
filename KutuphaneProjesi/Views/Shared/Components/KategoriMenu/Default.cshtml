@@ -1,0 +1,12 @@
+﻿@model IEnumerable<KutuphaneProjesi.Models.Kategori>
+
+<div class="list-group">
+    <a asp-action="Index" asp-controller="Kitaplar" class="list-group-item list-group-item-action">Tüm Kitaplar</a>
+    @if (Model != null)
+    {
+        @foreach (var kategori in Model)
+        {
+            <a asp-action="Index" asp-controller="Kitaplar" asp-route-kategoriId="@kategori.Id" class="list-group-item list-group-item-action">@kategori.Ad</a>
+        }
+    }
+</div>

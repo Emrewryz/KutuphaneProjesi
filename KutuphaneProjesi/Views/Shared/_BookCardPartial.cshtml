@@ -1,0 +1,37 @@
+﻿@model KutuphaneProjesi.Models.KITAPLAR
+
+<div class="col-md-4 mb-4">
+    <div class="card h-100 shadow-sm">
+        @if (!string.IsNullOrEmpty(Model.GorselUrl))
+        {
+            <img src="@Model.GorselUrl" class="card-img-top" alt="@Model.Ad" style="height: 200px; object-fit: cover;">
+        }
+        else
+        {
+            <img src="https://placehold.co/600x400?text=Gorsel+Yok" class="card-img-top" alt="Görsel Yok" style="height: 200px; object-fit: cover;">
+        }
+
+        <div class="card-body d-flex flex-column">
+            <h5 class="card-title">@Model.Ad</h5>
+            <h6 class="card-subtitle mb-2 text-muted">@Model.Yazar?.AdSoyad</h6>
+            <p class="card-text">
+                @if (!string.IsNullOrEmpty(Model.Aciklama) && Model.Aciklama.Length > 100)
+                {
+                    @(Model.Aciklama.Substring(0, 100) + "...")
+                }
+                else
+                {
+                    @Model.Aciklama
+                }
+            </p>
+            <div class="mt-auto">
+                <a asp-action="Details" asp-controller="Kitaplar" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-secondary">Detaylar</a>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-action="Edit" asp-controller="Kitaplar" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-primary">Düzenle</a>
+                    <a asp-action="Delete" asp-controller="Kitaplar" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-danger">Sil</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+﻿@model IEnumerable<KutuphaneProjesi.Models.KITAPLAR>
+
+@{
+    ViewData["Title"] = "Kitaplar";
+}
+
+<h1>Kitap Listesi</h1>
+
+<div class="row mb-4 align-items-center">
+    <div class="col-md-8">
+        <form asp-controller="Kitaplar" asp-action="Index" method="get">
+            <div class="input-group">
+                <input type="text" name="aramakelimesi" class="form-control" placeholder="Aranacak kitap adını giriniz..." />
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-search"></i> Ara
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-4 text-end">
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-action="Create" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i> Yeni Kitap Ekle
+            </a>
+        }
+    </div>
+</div>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        @await Html.PartialAsync("_BookCardPartial", item)
+    }
+</div>

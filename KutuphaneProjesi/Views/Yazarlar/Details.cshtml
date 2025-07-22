@@ -1,0 +1,22 @@
+﻿@model KutuphaneProjesi.Models.YAZARLAR
+
+@{
+    ViewData["Title"] = "Yazar Detayları";
+}
+
+<h1>Yazar Detayları</h1>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AdSoyad)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AdSoyad)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Düzenle</a> |
+    <a asp-action="Index">Listeye Geri Dön</a>
+</div>

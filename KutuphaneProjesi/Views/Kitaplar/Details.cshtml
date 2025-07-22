@@ -1,0 +1,52 @@
+﻿@model KutuphaneProjesi.Models.KITAPLAR
+
+@{
+    ViewData["Title"] = Model.Ad; 
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4">
+            @if (!string.IsNullOrEmpty(Model.GorselUrl))
+            {
+                <img src="@Model.GorselUrl" class="img-fluid rounded shadow-sm" alt="@Model.Ad">
+            }
+            else
+            {
+                <img src="https://placehold.co/600x800?text=Gorsel+Yok" class="img-fluid rounded shadow-sm" alt="Görsel Yok">
+            }
+            <div class="d-grid gap-2 mt-3">
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Düzenle</a>
+                }
+                <a asp-action="Index" class="btn btn-secondary">Listeye Geri Dön</a>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <h1 class="display-5">@Model.Ad</h1>
+            <h4 class="text-muted">@Model.Yazar?.AdSoyad</h4>
+            <hr />
+
+            <h5>Kitap Künyesi</h5>
+            <dl class="row">
+                <dt class="col-sm-3">Kategori</dt>
+                <dd class="col-sm-9">@(Model.Kategori?.Ad ?? "Belirtilmemiş")</dd>
+
+                <dt class="col-sm-3">Sayfa Sayısı</dt>
+                <dd class="col-sm-9">@Model.SayfaSayisi</dd>
+            </dl>
+
+            <h5 class="mt-4">Açıklama</h5>
+            <p>@Model.Aciklama</p>
+
+            <hr />
+
+            <h5 class="mt-4">İçerik</h5>
+            <div style="white-space: pre-wrap; font-family: 'Georgia', serif; line-height: 1.7; text-align: justify; font-size: 1.1rem;">
+                @Model.Icerik
+            </div>
+        </div>
+    </div>
+</div>
